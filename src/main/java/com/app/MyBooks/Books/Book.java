@@ -14,9 +14,18 @@ public class Book {
     String ISBN;
 
     String Autor;
+    String Titulo;
     Integer numeroDePaginas;
     String capaUrl;
     Integer nota;
+
+    public String getTitulo() {
+        return Titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        Titulo = titulo;
+    }
 
     @Enumerated(EnumType.STRING)
     BooksStatus status;

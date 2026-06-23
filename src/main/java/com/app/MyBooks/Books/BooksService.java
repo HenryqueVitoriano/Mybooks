@@ -9,7 +9,7 @@ public class BooksService {
     @Autowired
     private BooksRepository booksRepository;
 
-    public void POST(Book books){
+    public void Save(Book books){
         booksRepository.save(books);
     }
 }

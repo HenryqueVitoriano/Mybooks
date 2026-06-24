@@ -1,21 +1,39 @@
 package com.app.MyBooks.Books;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@RequestMapping("/books")
 public class BooksControler {
 
-    BooksService booksService;
+    private final BooksService booksService;
+
+    @Autowired
+    public BooksControler(BooksService booksService){
+        this.booksService = booksService;
+
+    }
 
     @PostMapping
-    public void POST(Book book){
-        booksService.Save(book);
+    public ResponseEntity<Book> POST(@RequestBody String isbn){
+        Book book = booksService.Save(isbn);
+        return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(book);
     }
 
     @GetMapping
-    public void GET(String isbn){
+    public ResponseEntity<List<Book>> getAllBooks(){
+        List<Book> books = booksService.findAllBooks();
+        return ResponseEntity.ok(books);
 
+    }
+    @GetMapping("/{isbn}")
+    public ResponseEntity<Book> getBookByIsbn(@PathVariable String isbn){
+        Book book = booksService.findByIsbn(isbn);
+        return ResponseEntity.ok(book);
     }
 }

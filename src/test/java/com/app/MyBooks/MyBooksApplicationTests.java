@@ -1,48 +1,54 @@
 package com.app.MyBooks;
-
 import com.app.MyBooks.Books.Book;
+import com.app.MyBooks.Books.BooksControler;
 import com.app.MyBooks.Books.BooksStatus;
-import com.app.MyBooks.OpenLibrary.LibraryControler;
+import com.app.MyBooks.OpenLibrary.LibraryService;
 import com.app.MyBooks.Repository.BooksRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Scanner;
+
 
 @SpringBootTest
 class MyBooksApplicationTests {
-	Book Livro = new Book();
-	Scanner scanner = new Scanner(System.in);
+    Book Livro = new Book();
 
 	@Autowired
-	BooksRepository booksRepository;
+    private BooksRepository booksRepository;
 	@Autowired
-	LibraryControler libraryControler;
-
-	@BeforeEach
-	public void setup(){
-
-
-		Livro.setISBN("978-8537808276");
-		Livro.setAutor("Alexandre Dumas");
-		Livro.setNumeroDePaginas(1664);
-		Livro.setNota(10);
-		Livro.setStatus(BooksStatus.LIDO);
+    private LibraryService libraryService;
+	@Autowired
+	private BooksControler booksControler;
 
 
-	}
+    @Test
+    public void setup() {
+
+
+        Livro.setISBN("978-8537808276");
+        Livro.setAutor("Alexandre Dumas");
+        Livro.setNumeroDePaginas(1664);
+        Livro.setNota(10);
+        Livro.setStatus(BooksStatus.LIDO);
+
+
+    }
+
+    @Test
+    void savingAtDataBase() {
+        booksRepository.save(Livro);
+    }
+
+    @Test
+    void LibraryTest() {
+        String isbn = "9788535914849";
+        libraryService.buscarPorISBN(isbn);
+    }
 
 	@Test
-	void savingAtDataBase() {
-		booksRepository.save(Livro);
-	}
-
-	@Test
-	void LibraryTest(){
-		String isbn = "8532530788";
-		libraryControler.busca(isbn);
+    void GetTest(){
+		booksControler.getAllBooks();
 	}
 
 }

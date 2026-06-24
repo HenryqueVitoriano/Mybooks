@@ -1,18 +1,15 @@
 package com.app.MyBooks.OpenLibrary;
 
 import com.app.MyBooks.Books.Book;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+@Setter
+@Getter
 public class LibraryResponse {
 
     private List<Book> docs;
 
-    public List<Book> getDocs() {
-        return docs;
-    }
-
-    public void setDocs(List<Book> docs) {
-        this.docs = docs;
-    }
 }

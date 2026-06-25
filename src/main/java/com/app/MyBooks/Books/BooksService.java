@@ -18,18 +18,21 @@ public class BooksService {
     }
 
     public Book Save(String isbn){
-        String isbnLimpo = isbn.replace("\"", "").trim();
-        LibraryResponse response = service.buscarPorISBN(isbnLimpo);
+        LibraryResponse response = service.buscarPorISBN(isbn);
+
+        if (response.getDocs() == null || response.getDocs().isEmpty()){
+            throw new RuntimeException("LIVRO NÃO ENCONTRADO");
+        }
 
         Book books = new Book();
 
-        books.setISBN(isbnLimpo);
+        books.setISBN(isbn);
         Integer paginas = response.getDocs().get(0).getNumeroDePaginas();
         books.setNumeroDePaginas(paginas != null ? paginas : 0); // Se for nulo, grava 0
         books.setNota(10);
         books.setCapaUrl(response.getDocs().get(0).getCapaUrl());
         books.setTitulo(response.getDocs().get(0).getTitulo());
-        books.setAutor(response.getDocs().get(0).getAutor());
+        books.setAutor(response.getDocs().get(0).getAutorFormatado());
         books.setStatus(BooksStatus.LIDO);
         repository.save(books);
 

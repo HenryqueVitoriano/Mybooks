@@ -21,7 +21,8 @@ public class BooksControler {
 
     @PostMapping
     public ResponseEntity<Book> POST(@RequestBody String isbn){
-        Book book = booksService.Save(isbn);
+        String isbnLimpo = isbn.replace("\"", "").trim();
+        Book book = booksService.Save(isbnLimpo);
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(book);
     }
 

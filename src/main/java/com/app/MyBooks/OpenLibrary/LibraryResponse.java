@@ -1,6 +1,6 @@
 package com.app.MyBooks.OpenLibrary;
 
-import com.app.MyBooks.Books.Book;
+import com.app.MyBooks.Books.BookDoc;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +10,6 @@ import java.util.List;
 @Getter
 public class LibraryResponse {
 
-    private List<Book> docs;
+    private List<BookDoc> docs;
 
 }

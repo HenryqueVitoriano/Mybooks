@@ -11,7 +11,7 @@ public class LibraryService {
     LibraryResponse libraryResponse;
 
     public LibraryResponse buscarPorISBN(String isbn) {
-        String url = "https://openlibrary.org/search.json?isbn=" + isbn;
+        String url = "https://openlibrary.org/search.json?isbn=" + isbn + "&fields=*&limit=1";
         return libraryResponse = restTemplate.getForObject(url, LibraryResponse.class);
 
     }

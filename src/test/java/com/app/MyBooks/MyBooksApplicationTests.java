@@ -1,7 +1,9 @@
 package com.app.MyBooks;
+
 import com.app.MyBooks.Books.Book;
 import com.app.MyBooks.Books.BooksControler;
 import com.app.MyBooks.Books.BooksStatus;
+import com.app.MyBooks.OpenLibrary.LibraryResponse;
 import com.app.MyBooks.OpenLibrary.LibraryService;
 import com.app.MyBooks.Repository.BooksRepository;
 import org.junit.jupiter.api.Test;
@@ -9,17 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
-
 @SpringBootTest
 class MyBooksApplicationTests {
     Book Livro = new Book();
 
-	@Autowired
+    @Autowired
     private BooksRepository booksRepository;
-	@Autowired
+    @Autowired
     private LibraryService libraryService;
-	@Autowired
-	private BooksControler booksControler;
+    @Autowired
+    private BooksControler booksControler;
 
 
     @Test
@@ -43,12 +44,20 @@ class MyBooksApplicationTests {
     @Test
     void LibraryTest() {
         String isbn = "9788535914849";
-        libraryService.buscarPorISBN(isbn);
+        LibraryResponse response = libraryService.buscarPorISBN(isbn);
+
+        Livro.setNumeroDePaginas(response.getDocs().get(0).getNumeroDePaginas());
+        if (Livro.getNumeroDePaginas() == null || Livro.getNumeroDePaginas().describeConstable().isEmpty()) {
+            System.out.println("ATRIBUTO VAZIO");
+        } else {
+            System.out.println(Livro.getNumeroDePaginas());
+        }
     }
 
-	@Test
-    void GetTest(){
-		booksControler.getAllBooks();
-	}
+
+    @Test
+    void GetTest() {
+        booksControler.getAllBooks();
+    }
 
 }

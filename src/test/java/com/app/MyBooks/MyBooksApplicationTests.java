@@ -45,13 +45,6 @@ class MyBooksApplicationTests {
     void LibraryTest() {
         String isbn = "9788535914849";
         LibraryResponse response = libraryService.buscarPorISBN(isbn);
-
-        Livro.setNumeroDePaginas(response.getDocs().get(0).getNumeroDePaginas());
-        if (Livro.getNumeroDePaginas() == null || Livro.getNumeroDePaginas().describeConstable().isEmpty()) {
-            System.out.println("ATRIBUTO VAZIO");
-        } else {
-            System.out.println(Livro.getNumeroDePaginas());
-        }
     }
 
 

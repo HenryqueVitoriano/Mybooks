@@ -19,10 +19,9 @@ public class BooksControler {
 
     }
 
-    @PostMapping
-    public ResponseEntity<Book> POST(@RequestBody String isbn){
-        String isbnLimpo = isbn.replace("\"", "").trim();
-        Book book = booksService.Save(isbnLimpo);
+    @PostMapping(path = "/{isbn}")
+    public ResponseEntity<Book> POST(@PathVariable String isbn){
+        Book book = booksService.Save(isbn);
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(book);
     }
 

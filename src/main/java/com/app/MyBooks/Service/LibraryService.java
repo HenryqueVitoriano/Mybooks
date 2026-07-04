@@ -20,7 +20,7 @@ public class LibraryService {
     }
 
     public LibraryResponse openLibraryNameRequesition(String isbn){
-        String url = "https://openlibrary.org/search.json?isbn=](https://openlibrary.org/search.json?isbn=)" + isbn;
+        String url = "https://openlibrary.org/search.json?isbn=" + isbn;
         return libraryResponse = restTemplate.getForObject(url, LibraryResponse.class);
     }
 }

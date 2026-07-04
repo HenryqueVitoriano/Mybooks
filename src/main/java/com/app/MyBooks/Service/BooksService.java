@@ -29,7 +29,7 @@ public class BooksService {
         Book books = new Book();
 
         books.setISBN(isbn);
-        books.setNumerOfPages(response.getNumberOfPages());
+        books.setNumberOfPages(response.getNumberOfPages());
         books.setNote(10);
         books.setCoverUrl(response.getCoverUrl());
         books.setTitle(response.getTitle());

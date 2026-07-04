@@ -17,9 +17,9 @@ public class Book {
     @Id
     private String ISBN;
 
-    private String Author;
-    private String Title;
-    private Integer numerOfPages;
+    private String author;
+    private String title;
+    private Integer numberOfPages;
     private String coverUrl;
 
     @Max(10)

@@ -31,7 +31,7 @@ class MyBooksApplicationTests {
         Livro.setAutor("Alexandre Dumas");
         Livro.setNumeroDePaginas(1664);
         Livro.setNota(10);
-        Livro.setStatus(BooksStatus.LIDO);
+        Livro.setStatus(BooksStatus.READ);
 
 
     }
@@ -44,7 +44,7 @@ class MyBooksApplicationTests {
     @Test
     void LibraryTest() {
         String isbn = "9788535914849";
-        LibraryResponse response = libraryService.buscarPorISBN(isbn);
+        LibraryResponse response = libraryService.openLibraryISBN(isbn);
     }
 
 

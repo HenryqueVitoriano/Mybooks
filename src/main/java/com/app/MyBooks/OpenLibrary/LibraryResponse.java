@@ -12,24 +12,24 @@ import java.util.Objects;
 public class LibraryResponse {
 
     @JsonProperty("title")
-    private String titulo;
+    private String title;
 
     @JsonProperty("author_name")
-    private String autor;
+    private String author;
 
     @JsonProperty("number_of_pages")
-    private Integer numeroDePaginas;
+    private Integer numberOfPages;
 
     @JsonProperty("covers")
     private List<Integer> covers;
 
-    public String getCapaUrl() {
+    public String getCoverUrl() {
         return (covers != null && !covers.isEmpty())
                 ? "https://covers.openlibrary.org/b/id/" + covers.get(0) + "-L.jpg"
                 : null;
     }
 
-    public String getAutorFormatado(){
-        return Objects.requireNonNullElse(autor, " ");
+    public String getAuthorName(){
+        return Objects.requireNonNullElse(author, "Autor não identificado");
     }
 }

@@ -15,11 +15,11 @@ public class Book {
     @Id
     private String ISBN;
 
-    private String Autor;
-    private String Titulo;
-    private Integer numeroDePaginas;
-    private String capaUrl;
-    private Integer nota;
+    private String Author;
+    private String Title;
+    private Integer numerOfPages;
+    private String coverUrl;
+    private Integer note;
 
     @Enumerated(EnumType.STRING)
     BooksStatus status;

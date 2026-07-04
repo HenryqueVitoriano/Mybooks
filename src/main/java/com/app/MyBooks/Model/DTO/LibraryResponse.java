@@ -1,14 +1,16 @@
-package com.app.MyBooks.OpenLibrary;
+package com.app.MyBooks.Model.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
 import java.util.Objects;
 
 @Setter
 @Getter
+@ToString
 public class LibraryResponse {
 
     @JsonProperty("title")
@@ -30,6 +32,6 @@ public class LibraryResponse {
     }
 
     public String getAuthorName(){
-        return Objects.requireNonNullElse(author, "Autor não identificado");
+        return Objects.requireNonNullElse(author, "unidentified author");
     }
 }

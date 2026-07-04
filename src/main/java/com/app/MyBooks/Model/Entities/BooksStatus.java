@@ -1,4 +1,4 @@
-package com.app.MyBooks.Books;
+package com.app.MyBooks.Model.Entities;
 
 public enum BooksStatus {
     READING, READ, WISH

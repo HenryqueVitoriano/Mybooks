@@ -1,7 +1,8 @@
-package com.app.MyBooks.Books;
+package com.app.MyBooks.Service;
 
-import com.app.MyBooks.OpenLibrary.LibraryResponse;
-import com.app.MyBooks.OpenLibrary.LibraryService;
+import com.app.MyBooks.Model.Entities.Book;
+import com.app.MyBooks.Model.DTO.LibraryResponse;
+import com.app.MyBooks.Model.Entities.BooksStatus;
 import com.app.MyBooks.Repository.BooksRepository;
 import org.springframework.stereotype.Service;
 

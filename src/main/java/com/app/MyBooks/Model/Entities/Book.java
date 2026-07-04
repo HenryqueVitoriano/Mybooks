@@ -1,9 +1,11 @@
-package com.app.MyBooks.Books;
+package com.app.MyBooks.Model.Entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.*;
 
 @Setter
@@ -19,6 +21,9 @@ public class Book {
     private String Title;
     private Integer numerOfPages;
     private String coverUrl;
+
+    @Max(10)
+    @Min(0)
     private Integer note;
 
     @Enumerated(EnumType.STRING)

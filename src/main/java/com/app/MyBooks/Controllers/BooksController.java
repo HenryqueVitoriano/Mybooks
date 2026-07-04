@@ -13,13 +13,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/books")
-public class BooksControler {
+public class BooksController {
 
     private final BooksService booksService;
     ;
 
     @Autowired
-    public BooksControler(BooksService booksService) {
+    public BooksController(BooksService booksService) {
         this.booksService = booksService;
 
     }

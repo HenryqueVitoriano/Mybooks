@@ -1,7 +1,7 @@
 package com.app.MyBooks;
 
 import com.app.MyBooks.Model.Entities.Book;
-import com.app.MyBooks.Controllers.BooksControler;
+import com.app.MyBooks.Controllers.BooksController;
 import com.app.MyBooks.Model.Entities.BooksStatus;
 import com.app.MyBooks.Model.DTO.LibraryResponse;
 import com.app.MyBooks.Service.LibraryService;
@@ -20,7 +20,7 @@ class MyBooksApplicationTests {
     @Autowired
     private LibraryService libraryService;
     @Autowired
-    private BooksControler booksControler;
+    private BooksController booksControler;
 
 
 

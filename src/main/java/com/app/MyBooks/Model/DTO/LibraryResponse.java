@@ -6,18 +6,20 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.List;
-import java.util.Objects;
 
 @Setter
 @Getter
 @ToString
 public class LibraryResponse {
 
+    @JsonProperty("docs")
+    private List<LibraryResponse> docs;
+
     @JsonProperty("title")
     private String title;
 
     @JsonProperty("author_name")
-    private String author;
+    private List<String> author;
 
     @JsonProperty("number_of_pages")
     private Integer numberOfPages;
@@ -32,6 +34,14 @@ public class LibraryResponse {
     }
 
     public String getAuthorName(){
-        return Objects.requireNonNullElse(author, "unidentified author");
+
+        if (author != null && !author.isEmpty()) {
+            return author.get(0);
+        }
+
+        if (docs != null && !docs.isEmpty()) {
+            return docs.get(0).getAuthorName();
+        }
+        return null;
     }
 }

@@ -21,7 +21,8 @@ public class BooksService {
 
     public Book createBook(String isbn) {
         LibraryResponse response = service.openLibraryISBN(isbn);
-        if (response == null) {
+        LibraryResponse responseName = service.openLibraryNameRequesition(isbn);
+        if (response == null || responseName == null) {
             throw new RuntimeException("Book not found");
         }
 
@@ -32,7 +33,7 @@ public class BooksService {
         books.setNote(10);
         books.setCoverUrl(response.getCoverUrl());
         books.setTitle(response.getTitle());
-        books.setAuthor(response.getAuthorName());
+        books.setAuthor(responseName.getAuthorName());
         books.setStatus(BooksStatus.WISH);
 
         repository.save(books);

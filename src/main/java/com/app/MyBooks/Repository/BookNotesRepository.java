@@ -10,5 +10,5 @@ import java.util.List;
 public interface BookNotesRepository extends JpaRepository<BookNotes, String> {
     List<BookNotes> findByBook_ISBN(String ISBN);
     BookNotes findByID(Long id);
-    boolean existsByID(Long ID);
+
 }

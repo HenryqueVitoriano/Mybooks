@@ -1,10 +1,10 @@
 package com.app.MyBooks.Service;
 
+import com.app.MyBooks.Exceptions.BookNotFoundException;
 import com.app.MyBooks.Model.Entities.Book;
 import com.app.MyBooks.Model.DTO.LibraryResponse;
 import com.app.MyBooks.Model.Entities.BooksStatus;
 import com.app.MyBooks.Repository.BooksRepository;
-import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,12 +19,11 @@ public class BooksService {
         this.service = libraryService;
     }
 
-    @Operation(summary = "Creating a new book")
     public Book createBook(String isbn) {
         LibraryResponse response = service.openLibraryISBN(isbn);
         LibraryResponse responseName = service.openLibraryNameRequesition(isbn);
         if (response == null || responseName == null) {
-            throw new RuntimeException("Book not found");
+            throw new BookNotFoundException();
         }
 
         Book books = new Book();
@@ -42,20 +41,42 @@ public class BooksService {
         return books;
     }
 
-    public void save(Book book){
-        repository.save(book);
-    }
 
     public List<Book> findAllBooks() {
         return repository.findAll();
     }
 
-    public Book findByIsbn(String isbn) {
-        return repository.findById(isbn).
-                orElseThrow(() -> new RuntimeException("Book not found"));
+    public Book getBookByIsbn(String isbn) {
+      Book book = repository.findByISBN(isbn);
+
+       if (book == null){
+           throw new BookNotFoundException();
+       }
+
+       return book;
     }
 
-    public void delete(Book book) {
+    public Book delete(String ISBN) {
+        Book book = repository.findByISBN(ISBN);
+
+        if (book == null){
+            throw new BookNotFoundException();
+        }
+
         repository.delete(book);
+        return book;
+    }
+
+    public Book updateNoteAndStatus(String isbn, Integer note, String status) {
+        Book book = repository.findByISBN(isbn);
+
+        if (book == null){
+            throw new BookNotFoundException();
+        }
+
+        book.setNote(note);
+        book.setStatus(BooksStatus.valueOf(status));
+
+        return repository.save(book);
     }
 }

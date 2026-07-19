@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.plaf.SeparatorUI;
+import javax.swing.plaf.PanelUI;
 import java.util.List;
 
 @RestController
@@ -30,6 +30,12 @@ public class NotesController {
     @Operation(summary = "Get all notes using an book ISBN")
     public List<BookNotes> getNotes(@PathVariable(name = "isbn") String ISBN){
         return notesService.getNotes(ISBN);
+    }
+
+    @GetMapping(path = "/{id}")
+    @Operation(summary = "Get the specifically note using id")
+    public BookNotes getSpecificallyNote(@PathVariable(name = "id") Long id){
+        return notesService.getSpecificallyNote(id);
     }
 
     @PutMapping(path = "/{id}")

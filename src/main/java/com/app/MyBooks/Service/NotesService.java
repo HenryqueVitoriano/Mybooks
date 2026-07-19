@@ -1,5 +1,6 @@
 package com.app.MyBooks.Service;
 
+import com.app.MyBooks.Exceptions.NoteNotFoundException;
 import com.app.MyBooks.Model.Entities.Book;
 import com.app.MyBooks.Model.Entities.BookNotes;
 import com.app.MyBooks.Repository.BookNotesRepository;
@@ -15,7 +16,7 @@ public class NotesService {
     private final BookNotesRepository bookNotesRepository;
 
 
-    NotesService(BookNotesRepository bookNotesRepository, BooksService booksService){
+    NotesService(BookNotesRepository bookNotesRepository, BooksService booksService) {
         this.booksService = booksService;
         this.bookNotesRepository = bookNotesRepository;
     }
@@ -23,15 +24,15 @@ public class NotesService {
     public BookNotes createNote(String isbn, String content) {
         Book book = booksService.findByIsbn(isbn);
 
-            BookNotes newNote = new BookNotes();
+        BookNotes newNote = new BookNotes();
 
-            newNote.setCreatedAt(LocalDate.now());
-            newNote.setContent(content);
-            newNote.setBook(book);
+        newNote.setCreatedAt(LocalDate.now());
+        newNote.setContent(content);
+        newNote.setBook(book);
 
-            bookNotesRepository.save(newNote);
+        bookNotesRepository.save(newNote);
 
-            return newNote;
+        return newNote;
 
     }
 
@@ -42,27 +43,36 @@ public class NotesService {
     }
 
     public BookNotes updateContent(Long id, String content) {
-        if (bookNotesRepository.existsByID(id)){
-            BookNotes bookNotes = bookNotesRepository.findByID(id);
+        BookNotes bookNotes = bookNotesRepository.findByID(id);
 
-            bookNotes.setContent(content);
-            bookNotesRepository.save(bookNotes);
-
-            return bookNotes;
+        if (bookNotes == null) {
+            throw new NoteNotFoundException();
         }
 
-        return null;
+        bookNotes.setContent(content);
+
+        return bookNotesRepository.save(bookNotes);
     }
 
     public BookNotes deleteNote(Long id) {
-        if (bookNotesRepository.existsByID(id)){
+        BookNotes bookNotes = bookNotesRepository.findByID(id);
 
-            BookNotes bookNotes = bookNotesRepository.findByID(id);
-
-            bookNotesRepository.delete(bookNotes);
-            return bookNotes;
+        if (bookNotes == null) {
+            throw new NoteNotFoundException();
         }
 
-        return null;
+        bookNotesRepository.delete(bookNotes);
+        return bookNotes;
+
+    }
+
+    public BookNotes getSpecificallyNote(Long id) {
+        BookNotes bookNotes = bookNotesRepository.findByID(id);
+
+        if (bookNotes == null){
+            throw new NoteNotFoundException();
+        }
+
+        return bookNotes;
     }
 }

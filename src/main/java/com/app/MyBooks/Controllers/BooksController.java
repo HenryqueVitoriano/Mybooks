@@ -1,7 +1,6 @@
 package com.app.MyBooks.Controllers;
 
 import com.app.MyBooks.Service.BooksService;
-import com.app.MyBooks.Model.Entities.BooksStatus;
 import com.app.MyBooks.Model.Entities.Book;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,15 +39,14 @@ public class BooksController {
     @GetMapping(path = "/{isbn}")
     @Operation(summary = "See the specifically book using ISBN")
     public ResponseEntity<Book> getBookByIsbn(@PathVariable String isbn) {
-        Book book = booksService.findByIsbn(isbn);
+        Book book = booksService.getBookByIsbn(isbn);
         return ResponseEntity.ok(book);
     }
 
     @DeleteMapping(path = "/{isbn}")
     @Operation(summary = "Delete a book using ISBN")
     public ResponseEntity<Book> deleteBook(@PathVariable String isbn) {
-        Book book = booksService.findByIsbn(isbn);
-        booksService.delete(book);
+        Book book = booksService.delete(isbn);
         return ResponseEntity.ok(book);
 
 
@@ -56,20 +54,8 @@ public class BooksController {
 
     @PutMapping(path = "/{isbn}")
     @Operation(summary = "Update note and status values")
-    public ResponseEntity<Book> updateNoteAndStatus(@PathVariable String isbn,
-                                                    @RequestParam("note") Integer note,
-                                                    @RequestParam("status") String status) throws RuntimeException {
-        Book book = booksService.findByIsbn(isbn);
-
-        try {
-            book.setStatus(BooksStatus.valueOf(status.toUpperCase()));
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Illegal argument");
-        }
-
-        book.setNote(note);
-
-        booksService.save(book);
+    public ResponseEntity<Book> updateNoteAndStatus(@PathVariable String isbn, @RequestParam("note") Integer note, @RequestParam("status") String status) {
+        Book book = booksService.updateNoteAndStatus(isbn, note, status);
         return ResponseEntity.ok(book);
     }
 

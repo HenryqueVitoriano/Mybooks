@@ -13,6 +13,10 @@ SpringBoot:
      - RequestBody é mais utilizado no spring moderno. Ele converte um JSON para um objeto Java. Utilizamos dentro de NotesController para o conteúdo das notas.
 
 
+SpringData
+      - O proprio SpringData consegue criar métodos de busca de acordo com a nomeclatura usada. Conferir a interface BookNotesRepository
+
+
 
 DTO:
     - Usamos um DTO para termos maior controle sobre informações de entrada, como no caso das informações da openLibrary, ou nas de saída,

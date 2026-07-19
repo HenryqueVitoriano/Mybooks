@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public class BookNotes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    Long ID;
 
     LocalDate createdAt;
 

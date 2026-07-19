@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.plaf.SeparatorUI;
 import java.util.List;
 
 @RestController
@@ -29,5 +30,19 @@ public class NotesController {
     @Operation(summary = "Get all notes using an book ISBN")
     public List<BookNotes> getNotes(@PathVariable(name = "isbn") String ISBN){
         return notesService.getNotes(ISBN);
+    }
+
+    @PutMapping(path = "/{id}")
+    @Operation(summary = "Update notes using id")
+    public ResponseEntity<BookNotes> updateContent(@PathVariable Long id, @RequestBody NoteResponse response){
+        BookNotes bookNotes = notesService.updateContent(id, response.getContent());
+        return ResponseEntity.status(HttpStatus.CREATED).body(bookNotes);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    @Operation(summary = "Delete notes using ID")
+    public ResponseEntity<BookNotes> deleteNotes(@PathVariable Long id){
+        BookNotes bookNotes = notesService.deleteNote(id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(bookNotes);
     }
 }

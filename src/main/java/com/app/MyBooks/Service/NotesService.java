@@ -40,4 +40,29 @@ public class NotesService {
 
         return bookNotesRepository.findByBook_ISBN(isbn);
     }
+
+    public BookNotes updateContent(Long id, String content) {
+        if (bookNotesRepository.existsByID(id)){
+            BookNotes bookNotes = bookNotesRepository.findByID(id);
+
+            bookNotes.setContent(content);
+            bookNotesRepository.save(bookNotes);
+
+            return bookNotes;
+        }
+
+        return null;
+    }
+
+    public BookNotes deleteNote(Long id) {
+        if (bookNotesRepository.existsByID(id)){
+
+            BookNotes bookNotes = bookNotesRepository.findByID(id);
+
+            bookNotesRepository.delete(bookNotes);
+            return bookNotes;
+        }
+
+        return null;
+    }
 }

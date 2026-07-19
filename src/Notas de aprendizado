@@ -1,11 +1,20 @@
 
 Relacionamentos:
-     - relembrando que o lado que guarda a FK (foreign key) é o lado onde o @JoinColumn fica
+     - relembrando que o lado que guarda a FK (foreign key) é o lado onde o @JoinColumn fica.
 
      - Para aumentar o tamanho do limite do conteúdo, podemos usar @Column(lenght =) ou nesse caso, como é um texto
-       sem limites, podemos usar @Column(columnDefinition = "TEXT")
+       sem limites, podemos usar @Column(columnDefinition = "TEXT").
 
 
 SpringBoot:
      - Diferença entre RequestParam e PathVariable: Temos que analisar se o conteúdo é *OBRIGATÓRIO*, caso ele seja, utilizamos o PathVariable
        pois ele faz parte da URL. Já o RequestParam é utilizado apenas para refinar a busca.
+
+     - RequestBody é mais utilizado no spring moderno. Ele converte um JSON para um objeto Java. Utilizamos dentro de NotesController para o conteúdo das notas.
+
+
+
+DTO:
+    - Usamos um DTO para termos maior controle sobre informações de entrada, como no caso das informações da openLibrary, ou nas de saída,
+      como é o caso do noteResponse. Em um caso filtramos o que queremos para criar um objeto Book e no outro caso filtramos o que o usuário pode ou não
+      ter controle. Nesse último caso o usuário pode apenas controlar e ter acesso ao conteúdo escrito por ele.

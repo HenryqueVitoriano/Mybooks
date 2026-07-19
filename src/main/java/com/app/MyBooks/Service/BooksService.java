@@ -4,6 +4,7 @@ import com.app.MyBooks.Model.Entities.Book;
 import com.app.MyBooks.Model.DTO.LibraryResponse;
 import com.app.MyBooks.Model.Entities.BooksStatus;
 import com.app.MyBooks.Repository.BooksRepository;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class BooksService {
         this.service = libraryService;
     }
 
-
+    @Operation(summary = "Creating a new book")
     public Book createBook(String isbn) {
         LibraryResponse response = service.openLibraryISBN(isbn);
         LibraryResponse responseName = service.openLibraryNameRequesition(isbn);

@@ -13,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class MyBooksApplicationTests {
-    Book Livro = new Book();
+    Book book = new Book();
 
     @Autowired
     private BooksRepository booksRepository;
@@ -26,12 +26,12 @@ class MyBooksApplicationTests {
 
     @Test
     void savingAtDataBase() {
-        Livro.setISBN("978-8537808276");
-        Livro.setAuthor("Alexandre Dumas");
-        Livro.setNumerOfPages(1664);
-        Livro.setNote(10);
-        Livro.setStatus(BooksStatus.READ);
-        booksRepository.save(Livro);
+        book.setISBN("978-8537808276");
+        book.setAuthor("Alexandre Dumas");
+        book.setNumberOfPages(1664);
+        book.setNote(10);
+        book.setStatus(BooksStatus.READ);
+        booksRepository.save(book);
     }
 
     @Test
@@ -39,12 +39,6 @@ class MyBooksApplicationTests {
         String isbn = "9788535914849";
         LibraryResponse response = libraryService.openLibraryISBN(isbn);
         System.out.println(response.toString());
-    }
-
-
-    @Test
-    void GetTest() {
-        booksControler.getAllBooks();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.app.MyBooks.Model.Entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -29,7 +30,8 @@ public class Book {
     @Enumerated(EnumType.STRING)
     BooksStatus status;
 
-    @OneToMany(mappedBy = "book")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     List<BookNotes> bookNotes = new ArrayList<>();
 
 }

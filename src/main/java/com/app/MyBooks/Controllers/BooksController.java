@@ -16,7 +16,7 @@ import java.util.List;
 public class BooksController {
 
     private final BooksService booksService;
-    ;
+
 
     @Autowired
     public BooksController(BooksService booksService) {
@@ -35,7 +35,6 @@ public class BooksController {
     @Operation(summary = "See all books saved in your DB")
     public List<Book> getAllBooks() {
         return booksService.findAllBooks();
-
     }
 
     @GetMapping(path = "/{isbn}")

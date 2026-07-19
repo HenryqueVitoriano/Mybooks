@@ -1,5 +1,6 @@
 package com.app.MyBooks.Service;
 
+import com.app.MyBooks.Exceptions.BookNotFoundException;
 import com.app.MyBooks.Exceptions.NoteNotFoundException;
 import com.app.MyBooks.Model.Entities.Book;
 import com.app.MyBooks.Model.Entities.BookNotes;
@@ -22,7 +23,11 @@ public class NotesService {
     }
 
     public BookNotes createNote(String isbn, String content) {
-        Book book = booksService.findByIsbn(isbn);
+        Book book = booksService.getBookByIsbn(isbn);
+
+        if (book == null){
+            throw new BookNotFoundException();
+        }
 
         BookNotes newNote = new BookNotes();
 
@@ -37,7 +42,11 @@ public class NotesService {
     }
 
     public List<BookNotes> getNotes(String isbn) {
-        booksService.findByIsbn(isbn);
+        Book book = booksService.getBookByIsbn(isbn);
+
+        if (book == null){
+            throw new BookNotFoundException();
+        }
 
         return bookNotesRepository.findByBook_ISBN(isbn);
     }
@@ -66,7 +75,13 @@ public class NotesService {
 
     }
 
-    public BookNotes getSpecificallyNote(Long id) {
+    public BookNotes getSpecificallyNote(String isbn, Long id) {
+        Book book = booksService.getBookByIsbn(isbn);
+
+        if (book == null){
+            throw new BookNotFoundException();
+        }
+
         BookNotes bookNotes = bookNotesRepository.findByID(id);
 
         if (bookNotes == null){

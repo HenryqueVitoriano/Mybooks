@@ -32,10 +32,10 @@ public class NotesController {
         return notesService.getNotes(ISBN);
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/{isbn}/{id}")
     @Operation(summary = "Get the specifically note using id")
-    public BookNotes getSpecificallyNote(@PathVariable(name = "id") Long id){
-        return notesService.getSpecificallyNote(id);
+    public BookNotes getSpecificallyNote(@PathVariable(name = "isbn") String isbn, @PathVariable(name = "id") Long id){
+        return notesService.getSpecificallyNote(isbn,id);
     }
 
     @PutMapping(path = "/{id}")

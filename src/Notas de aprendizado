@@ -1,0 +1,11 @@
+
+Relacionamentos:
+     - relembrando que o lado que guarda a FK (foreign key) é o lado onde o @JoinColumn fica
+
+     - Para aumentar o tamanho do limite do conteúdo, podemos usar @Column(lenght =) ou nesse caso, como é um texto
+       sem limites, podemos usar @Column(columnDefinition = "TEXT")
+
+
+SpringBoot:
+     - Diferença entre RequestParam e PathVariable: Temos que analisar se o conteúdo é *OBRIGATÓRIO*, caso ele seja, utilizamos o PathVariable
+       pois ele faz parte da URL. Já o RequestParam é utilizado apenas para refinar a busca.

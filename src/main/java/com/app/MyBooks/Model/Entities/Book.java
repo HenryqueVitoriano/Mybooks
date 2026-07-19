@@ -1,12 +1,12 @@
 package com.app.MyBooks.Model.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -28,5 +28,8 @@ public class Book {
 
     @Enumerated(EnumType.STRING)
     BooksStatus status;
+
+    @OneToMany(mappedBy = "book")
+    List<BookNotes> bookNotes = new ArrayList<>();
 
 }

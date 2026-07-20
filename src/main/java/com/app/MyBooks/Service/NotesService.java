@@ -25,9 +25,6 @@ public class NotesService {
     public BookNotes createNote(String isbn, String content) {
         Book book = booksService.getBookByIsbn(isbn);
 
-        if (book == null){
-            throw new BookNotFoundException();
-        }
 
         BookNotes newNote = new BookNotes();
 
@@ -42,11 +39,7 @@ public class NotesService {
     }
 
     public List<BookNotes> getNotes(String isbn) {
-        Book book = booksService.getBookByIsbn(isbn);
-
-        if (book == null){
-            throw new BookNotFoundException();
-        }
+         booksService.getBookByIsbn(isbn);
 
         return bookNotesRepository.findByBook_ISBN(isbn);
     }
@@ -76,12 +69,8 @@ public class NotesService {
     }
 
     public BookNotes getSpecificallyNote(String isbn, Long id) {
-        Book book = booksService.getBookByIsbn(isbn);
-
-        if (book == null){
-            throw new BookNotFoundException();
-        }
-
+        booksService.getBookByIsbn(isbn);
+        
         BookNotes bookNotes = bookNotesRepository.findByID(id);
 
         if (bookNotes == null){

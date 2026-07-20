@@ -1,5 +1,6 @@
 package com.app.MyBooks.Model.Entities;
 
+import com.app.MyBooks.Model.DTO.LibraryResponse;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
@@ -33,5 +34,15 @@ public class Book {
     @JsonManagedReference
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     List<BookNotes> bookNotes = new ArrayList<>();
+
+    public Book(String isbn, LibraryResponse response, LibraryResponse responseName){
+        this.setISBN(isbn);
+        this.setNumberOfPages(response.getNumberOfPages());
+        this.setNote(10);
+        this.setCoverUrl(response.getCoverUrl());
+        this.setTitle(response.getTitle());
+        this.setAuthor(responseName.getAuthorName());
+        this.setStatus(BooksStatus.WISH);
+    }
 
 }

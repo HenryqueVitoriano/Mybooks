@@ -22,3 +22,23 @@ DTO:
     - Usamos um DTO para termos maior controle sobre informações de entrada, como no caso das informações da openLibrary, ou nas de saída,
       como é o caso do noteResponse. Em um caso filtramos o que queremos para criar um objeto Book e no outro caso filtramos o que o usuário pode ou não
       ter controle. Nesse último caso o usuário pode apenas controlar e ter acesso ao conteúdo escrito por ele.
+
+
+Exceções:
+    - Para criar exceções personalizadas, criamos a classe da exceção que herda as funções da classe runTimeException.
+      Criamos outra classe Handler usando as notações @ControllerAdvice que irá tratar de todas as exceções que chegarem aos controllers.
+      Para definir quais exceções iremos tratar, usamos a notação @ExceptionHandler seguida da classe (BookNotFoundException.class).
+      Ver package infra para exemplos.
+
+
+Testes unitários:
+    - Funções criadas pelo JPA geralmente não precisam de testes unitários, já que o próprio JPA as testa antes. Mas caso necessite de testes,
+      usamos a notação @DataJpaTest acima da classe. Olhar BookNotesRepositoryTest como exemplo.
+
+    - Temos como boa prática não utilizar a database principal ao realizar testes unitários pois podemos acabar modificando ou deletando dados reais em produção
+      Uma boa opção é utilizar um banco de dados em memória, como o H2,  que "morre" após a execução do teste.
+
+    - Criamos um novo application.properties, agora chamado appplication-test.properties para carregar o H2 database.
+
+    - Temos como anotação o @DisplayName que tem a mesma função que o Operation(sumary), ou seja, explicar o que a função (nesse caso um teste) deve fazer.
+

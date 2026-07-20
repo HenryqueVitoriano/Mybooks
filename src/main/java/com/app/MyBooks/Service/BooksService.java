@@ -22,20 +22,12 @@ public class BooksService {
     public Book createBook(String isbn) {
         LibraryResponse response = service.openLibraryISBN(isbn);
         LibraryResponse responseName = service.openLibraryNameRequesition(isbn);
+
         if (response == null || responseName == null) {
             throw new BookNotFoundException();
         }
 
-        Book books = new Book();
-
-        books.setISBN(isbn);
-        books.setNumberOfPages(response.getNumberOfPages());
-        books.setNote(10);
-        books.setCoverUrl(response.getCoverUrl());
-        books.setTitle(response.getTitle());
-        books.setAuthor(responseName.getAuthorName());
-        books.setStatus(BooksStatus.WISH);
-
+        Book books = new Book(isbn, response, responseName);
         repository.save(books);
 
         return books;

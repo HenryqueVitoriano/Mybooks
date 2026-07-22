@@ -42,3 +42,7 @@ Testes unitários:
 
     - Temos como anotação o @DisplayName que tem a mesma função que o Operation(sumary), ou seja, explicar o que a função (nesse caso um teste) deve fazer.
 
+    - Um Mock é um objeto falso que substitui a implementação real. Ao injetar um mock numa classe, dizemos a ela para usar esse objeto falso no lugar da dependência
+      real e por padrão, os métodos do mock não executam lógica nenhuma (nem acessam banco, API, etc.), só registram que foram chamados, a menos que você configure
+      explicitamente o que eles devem retornar.
+
